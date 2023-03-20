@@ -1,0 +1,25 @@
+version: "2"
+
+services:
+    keycloak1:                                      # Nombre de servicio
+                                                    # Nombre fqdn resoluble a través del DNS de docker. 
+                                                    # Unos contenedores podrán acceder a otros a través de este nombre
+        container_name:                 mikeycloak1 # Nombre del contenedor. equivalente a cuando con el comando docker container create --name
+        image:                          quay.io/keycloak/keycloak:21.0
+        ports:
+                                      - 8080:8080   # Por defecto es lo mismo que 0.0.0.0:8080:8080
+                                                    # Que nos vincula el puerto 8080 en TODAS LAS IPs del host al puerto 80 del contenedor
+                                      #- 8443:8443
+        environment:
+            KEYCLOAK_ADMIN:             admin
+            KEYCLOAK_ADMIN_PASSWORD:    password
+            #- KC_DB=postgres
+            #- KC_DB_URL=<DBURL>
+            #- KC_DB_USERNAME=<DBUSERNAME>
+            #- KC_DB_PASSWORD=<DBPASSWORD>
+            #- KC_HOSTNAME=localhost
+
+        #volumes:
+        #    -
+        command:                        start-dev   # En entorno de prducción esto va fuera !
+        
