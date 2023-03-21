@@ -22,4 +22,6 @@ services:
         #volumes:
         #    -
         command:                        start-dev   # En entorno de prducción esto va fuera !
-        
+
+# Para ejecuatrlo, posicionados en la carpeta escribimos:
+# $ docker compose up

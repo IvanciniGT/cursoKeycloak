@@ -527,3 +527,73 @@ Entorno independiente para gestionar los:
 - Permisos
 
 Que puedan ser consumidos 
+
+
+---
+
+Quarkus
+
+Framework de JAVA orientado a Ejecutar JAVA en contenedores.
+
+Settings del entorno: Hostname settings: 
+Base URL: <unset>, 
+Hostname: <request>, 
+Strict HTTPS: false, 
+Path: <request>, 
+Strict BackChannel: false, 
+Admin URL: <unset>, 
+Admin: <request>, 
+Port: -1, 
+Proxied: false
+
+---
+
+Cuando voy a un entorno de producción:
+- Alta disponibilidad
+
+
+
+Serv Apps.1 Tomcat/JBoss    <<<<<<<
+    keycloak1 + infinispan1
+                    v ^                      Balanceador de carga <<<            Cliente 1
+Serv Apps.2 Tomcat/JBoss    <<<<<<<
+    keycloak2 + infinispan2
+    
+    
+La segunda petición que haga cliente1, se mandará al mismo serv. de apps? Dependerá de la configuración del balanceador.
+    STRIKY SESSIONS
+
+Puedo configurarlo o no.
+Lo que si, seguro es que el Cliente 2, no tiene por qué ir al mismo sitio que el cliente 1
+
+keycloak1 y keycloak2 usan memoria RAM: 
+- cache ****
+- almacenar datos de trabajo
+
+Puede pasar que keycloak1 ponga algo en la cache para acceder más rápido a ello... y evitarse por ejemplo una query a la BBDD
+Y qué pasa si el keycloak2 modifica ese algo? keycloak1 se entera y lo cambia en su cache? DEBERIA... pero eso no se hace solo.
+Porque si eso no lo configuro, keycloak1 me va a dar datos antiguos.
+
+El hecho es que cuando opero en cluster necesito una cache DISTRIBUIDA entre los nodos.
+Si el dato se actualiza en la cache de un nodo, el nuevo dato debe estar disponible en todas las caches del resto de nodos.
+Esto es lo que nos regala INFINISPAN
+
+KeyCloak usa internamente INFINISPAN para montar su cache de datos y poder operar en HA
+
+infinispan1 habla continuamente con infinispan2, para asegurarse que tienen los datos actualizados
+
+
+http://34.245.89.24:8080
+http://localhost:8080 y esta si que funciona... Pero Keycloak solo admite a priori http para localhost
+                                                No es keycloak el pijito.... Es una configuración a nivel de REALM < master
+                                                
+                                                
+./kcadm.sh update realms/master -s sslRequired=NONE --server http://localhost:8080 --realm master --user admin
+                                                                                                    ^ admin
+                                                                                    ^ realm
+                                                    ^Que instalacion? la que tenemos en esta ruta
+                                    ^Que puede trabajar sin SSL
+                    ^De nuestro realm master
+            ^ Modificacion
+  ^ Cliente de linea de comandos de KeyCloak: esta en la carpeta bin de keycloak
+  la Carpeta de keycloak es: /opt/keycloak
