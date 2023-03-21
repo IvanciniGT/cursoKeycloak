@@ -30,5 +30,38 @@ services:
         image:                          mailhog/mailhog
         container_name:                 mailhog
         ports:
-                                      - 1025:1025
+                                      - 1025:1025   # smtp
                                       - 8081:8025
+                                      
+    mi-web-server:
+        image:                          nginx:latest
+        container_name:                 minginx
+        ports:
+                                      - 8082:80
+
+    mi-proxy-oauth2:
+        depends_on:
+            keycloak1:
+                condition:              service_healthy
+
+
+        image:                          bitnami/oauth2-proxy:latest
+        container_name:                 miproxyoauth2
+        ports:
+                                      - 8083:4180
+        environment:
+                                      - OAUTH2_PROXY_HTTP_ADDRESS=0.0.0.0:4180
+                                      - OAUTH2_PROXY_EMAIL_DOMAINS=*
+                                      - OAUTH2_PROXY_UPSTREAMS=http://54.78.246.198:8082/
+                                      - OAUTH2_PROXY_COOKIE_SECURE=false
+                                      - OAUTH2_PROXY_COOKIE_SECRET=1234567812345678
+                                      - OAUTH2_PROXY_PROVIDER=oidc
+                                      - OAUTH2_PROXY_CLIENT_ID=mi-cliente
+                                      - OAUTH2_PROXY_CLIENT_SECRET=?????
+                                      - OAUTH2_PROXY_REDIRECT_URL=http://54.78.246.198:8083/oauth2/callback
+                                      - OAUTH2_PROXY_OIDC_ISSUER_URL=https://54.78.246.198:8443/realms/prueba
+                                      - OAUTH2_PROXY_CODE_CHALLENGE_METHOD=S256
+                                      - OAUTH2_PROXY_SSL_INSECURE_SKIP_VERIFY=true
+        command: 
+            - " "
+                                              
