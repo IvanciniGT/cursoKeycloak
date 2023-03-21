@@ -102,3 +102,5 @@ services:
           - PHPLDAPADMIN_HTTPS=false
         depends_on:
           - openldap
+
+
