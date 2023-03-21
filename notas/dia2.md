@@ -105,3 +105,19 @@ Le mandamos un JSON
 
 El access token lo mandamos como una cabecera HTTP:
 Autorization: bearer <ACCESSTOKEN>
+
+
+---
+
+# Proxy                                       Cliente de LDAP 
+Protege es un cliente                                v
+                                                    LDAP            PostgreSQL      Servidor de Email
+# Proxy reverso                                                             ^
+Proteger un backend                                             KeyCloak1       KeyCloak2   
+                                                                    ^           ^
+                                                                 nginx (proxy reverso y balanceador)
+                                                                    ^
+                                                                Oauth2Proxy (Juguete)      NGINX
+Cliente Persona     ----> Proxy     ------> Internet --------> Proxy reverso -----------> Servidor Web www.miempresa.com
+PC- Navegador               www.miempresa.com                   Enrutamiento / Balanceador de carga
+www.miempresa.com

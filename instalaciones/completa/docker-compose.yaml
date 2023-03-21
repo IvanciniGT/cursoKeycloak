@@ -16,6 +16,9 @@ services:
             KC_DB_USERNAME:             keycloak
             KC_DB_PASSWORD:             password
         command:                        start-dev
+        healthcheck:
+              test: ["CMD", "true"]
+              start_period: 20s
 
     midb:
         container_name:                 mipostgres
@@ -43,8 +46,6 @@ services:
         depends_on:
             keycloak1:
                 condition:              service_healthy
-
-
         image:                          bitnami/oauth2-proxy:latest
         container_name:                 miproxyoauth2
         ports:
@@ -57,7 +58,7 @@ services:
                                       - OAUTH2_PROXY_COOKIE_SECRET=1234567812345678
                                       - OAUTH2_PROXY_PROVIDER=oidc
                                       - OAUTH2_PROXY_CLIENT_ID=mi-cliente
-                                      - OAUTH2_PROXY_CLIENT_SECRET=?????
+                                      - OAUTH2_PROXY_CLIENT_SECRET=kDomv1bK33HIlQCUSVYxJw2r11IZn5Fb
                                       - OAUTH2_PROXY_REDIRECT_URL=http://54.78.246.198:8083/oauth2/callback
                                       - OAUTH2_PROXY_OIDC_ISSUER_URL=https://54.78.246.198:8443/realms/prueba
                                       - OAUTH2_PROXY_CODE_CHALLENGE_METHOD=S256
