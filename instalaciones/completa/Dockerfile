@@ -5,7 +5,7 @@ ENV KC_HEALTH_ENABLED=true
 ENV KC_METRICS_ENABLED=true
 WORKDIR /opt/keycloak
 
-ENV KC_HOSTNAME=54.78.246.198 
+ENV KC_HOSTNAME=3.253.29.47 
                               # AQUI PONEMOS LA IP QUE SACAMOS DEL "curl ifconfig.me"
                               # En un entorno real, que pondríamos ahí?
                               # El fqdn del servidor => El nombre de red del servidor de keycloak

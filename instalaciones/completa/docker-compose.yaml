@@ -19,7 +19,6 @@ services:
         healthcheck:
               test: ["CMD", "true"]
               start_period: 20s
-
     midb:
         container_name:                 mipostgres
         image:                          postgres:15.2
@@ -53,14 +52,14 @@ services:
         environment:
                                       - OAUTH2_PROXY_HTTP_ADDRESS=0.0.0.0:4180
                                       - OAUTH2_PROXY_EMAIL_DOMAINS=*
-                                      - OAUTH2_PROXY_UPSTREAMS=http://54.78.246.198:8082/
+                                      - OAUTH2_PROXY_UPSTREAMS=http://3.253.29.47:8082/
                                       - OAUTH2_PROXY_COOKIE_SECURE=false
                                       - OAUTH2_PROXY_COOKIE_SECRET=1234567812345678
                                       - OAUTH2_PROXY_PROVIDER=oidc
                                       - OAUTH2_PROXY_CLIENT_ID=mi-cliente
                                       - OAUTH2_PROXY_CLIENT_SECRET=kDomv1bK33HIlQCUSVYxJw2r11IZn5Fb
-                                      - OAUTH2_PROXY_REDIRECT_URL=http://54.78.246.198:8083/oauth2/callback
-                                      - OAUTH2_PROXY_OIDC_ISSUER_URL=https://54.78.246.198:8443/realms/prueba
+                                      - OAUTH2_PROXY_REDIRECT_URL=http://3.253.29.47:8083/oauth2/callback
+                                      - OAUTH2_PROXY_OIDC_ISSUER_URL=https://3.253.29.47:8443/realms/prueba
                                       - OAUTH2_PROXY_CODE_CHALLENGE_METHOD=S256
                                       - OAUTH2_PROXY_SSL_INSECURE_SKIP_VERIFY=true
         command: 
