@@ -56,3 +56,69 @@ NODE    Es el quivalente a la máquina virtual de JAVA
         Me permite ejecutar JS fuera de un navegador
 
 NPM     El equivalente en JAVA a MAVEN para el mundo JS
+
+---
+
+Maven arquetipo creado
+Que me genera la estructura básica de proyecto maven
+
+----
+
+# Frontal JS . En nuestro caso REACT-JS
+
+Proyecto, copmo si fuera JAVA.. con su código -> JS
+
+Vamos a usar una herramienta que se llama node = JVM
+
+Con node nosotros creamos un servidor WEB De pruebas.
+
+En ese servidor WEB tendremos un html y un montón de JS, que irán generan más HTML
+No creamos ficheros HTML con el JS... creamos COMPONENTES WEB = Trozos de HTML
+que vamos inyectando/modificando/eliminando del fichero HTML del que partimos.
+
+SPA = Single Page Application
+
+Todo el código JS que vamos a escribir, cuando se distribuyera el proyecto, se empaquetaría en un UNICO fichero .js
+Que si lo miraseis pareceria CHINO !
+Y ese JS, junto con los CSS, imagenes ,y html se cargarían en un servidor WEB (Apache, nginx... tomcat)
+
+En desarrollo, nos es cómodo usar NODE para crear ese servidor WEB.
+
+Vamos a usar también npm... El equivalente en el mundo JS a MAVEN
+
+
+---
+
+public class Usuario{
+    
+    public String nombre;
+    public int edad;
+    
+    public Usuario(){
+        this.nombre="Ivan";
+        this.edad=44;
+    }
+    
+}
+---
+class Usuario extends React.Component{
+    
+    constructor(){
+        this.state = {
+            "nombre": "Ivan",
+            "edad": 44
+        }
+    }
+    componentDidMount(){
+        // REACT llama a esta función, desdepués de que el constructor se ha ejecutado y el objeto (la instancia)
+        se ha inyectado en el navegador
+    }
+    render(){
+        return <div>
+                <p><strong>Nombre:</strong> {this.state.nombre} </p>
+               </div>
+    }
+    
+}
+
+<Usuario>

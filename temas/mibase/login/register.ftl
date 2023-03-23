@@ -77,7 +77,27 @@
                     </div>
                 </div>
             </#if>
+            
+            
+            
+            <div class="${properties.kcFormGroupClass!}">
+                <div class="${properties.kcLabelWrapperClass!}">
+                    <label for="user.attributes.phone" class="${properties.kcLabelClass!}">${msg("phone")}</label>
+                </div>
+                <div class="${properties.kcInputWrapperClass!}">
+                    <input  type="text" 
+                            class="${properties.kcInputClass!}" 
 
+                            id="user.attributes.phone" 
+                            name="user.attributes.phone"
+                            value="${(register.formData['user.attributes.phone']!'')}" 
+                            autocomplete="phone"
+                    />
+                </div>
+            </div>
+
+            
+            
             <#if passwordRequired??>
                 <div class="${properties.kcFormGroupClass!}">
                     <div class="${properties.kcLabelWrapperClass!}">
