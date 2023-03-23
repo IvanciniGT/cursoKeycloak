@@ -7,7 +7,8 @@ const Config = { // Mapa de JAVA
     url: 'https://3.253.29.47:8443',
     realm: 'prueba',
     clientId: 'react',
-    onLoad: 'login-required'
+    onLoad: 'login-required',
+    scope: 'telefono'
 }
 
 class KeycloakLogin extends Component {
@@ -21,18 +22,18 @@ class KeycloakLogin extends Component {
 
     componentDidMount() {
         const keycloak = Keycloak(Config);
-        keycloak.init({ onLoad: "login-required", promiseType: 'native' }).then(authenticated => {
+        keycloak.init().then(authenticated => {
             this.setState({ keycloak: keycloak, authenticated: authenticated })
         });
     }
 
     render() {
         if (this.state.keycloak && this.state.authenticated ) {
-            return this.state.keycloak.token;
-            //var jwt = JSON.stringify(decode(this.state.keycloak.token));
-            //return <div>
-            //            <JSONPretty id="json-pretty" data={jwt}></JSONPretty>
-            //        </div>
+            //return this.state.keycloak.token;
+            var jwt = JSON.stringify(decode(this.state.keycloak.token));
+            return <div>
+                        <JSONPretty id="json-pretty" data={jwt}></JSONPretty>
+                    </div>
         } else {
             return <div>Esperando a login de KeyCloak</div>
         }
