@@ -15,10 +15,15 @@ services:
             KC_DB_URL:                  jdbc:postgresql://midb:5432/keycloak
             KC_DB_USERNAME:             keycloak
             KC_DB_PASSWORD:             password
-        command:                        start-dev
+        command:                        start-dev           
+                                        #start --optimized # Esto es lo que voy a poner cuando quiera generar el contenedor 
+                                                           # Que voy a usar en producción
         healthcheck:
               test: ["CMD", "true"]
               start_period: 20s
+        volumes: 
+                                    # - miruta/millavero:/opt/keycloak/conf/server.keystore # Mi propio certificado real
+                                      - ../../temas:/opt/keycloak/themes
     midb:
         container_name:                 mipostgres
         image:                          postgres:15.2
