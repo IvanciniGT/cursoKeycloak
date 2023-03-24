@@ -81,3 +81,63 @@ Lo rellena >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Si el usuario es correc
                 Se representa <<<<<
                 
 USUARIO         NAVEGADOR           WEB(JS)             KEYCLOAK            SERVIDOR WEB            SERVICIOS BACKEND
+
+
+
+---
+
+AUTENTICACION
+
+Para autenticar:                                                Usuarios                Client/Apps
+- O me das algo secreto que solo tu y yo conocemos:             Contraseña      /       SECRET
+- O alguien en quien confío me dice que tu eres tu:             DNI                     ENTIDAD CERTIFICADORA
+                                                                                        EN MI MISMO (KeyCloak)???
+
+Quizas puedo generarte YO (KeyCloak) el equivalente a un CERTIFICADO, y cada vez que vengas, me lo presentas: TOKEN DE ACCESO: JWT
+
+Un Certificado, si viene firmado (respaldado) por una CA en la que confío, también me vale.
+
+KEYCLOAK                    <<<<< https <<<<<               CLIENTE (Aplicación)
+Certificado                                                 Puede presentar también SU PROPIO CERTIFICADO
+   ^                                                        ^
+   Quién lo Firma?                                          Quién lo Firma?
+   Una CA de confianza A                                    Una CA de confianza B
+CA Válidas:                                                 CA válidas:
+    CA B                                                    CA A
+    
+TLS: 1  Quién presenta certificado? El servidor
+TLS: 2. Quién presenta certificado? El servidor + Cliente
+    Cuando haceis la declaración de la RENTA 
+    
+    
+Kubernetes...
+Y sabeis dentro del Kubernetes como configuramos las comunicaciones entre elementos dentro del cluster
+
+Microservicios > KeyCloak       http / https
+                                ****            Así las configuro 
+                                       *****    Así las quiero              ¿? EIN ¿? Que has fumao Iván????
+                                
+Considero seguro mi red? TRUST ZERO POLICY !!!!!!!
+La mayor parte de los ataques vienen de dentro.
+
+Si... ya en el kubernetes instalo ISTIO / LinkerD
+
+
+---
+
+Qué me da un jwt? Qué me dice el token de acceso? QUE YO SOY YO
+
+Para qué usamos los client-id
+
+react? ->   Para generar un jwt: Para autenticarme y sacar mis datos
+            Para validar el jwt
+
+springboot? ->  Para validar el jwt 
+                Y prodré validar roles... eso si, los roles tendrán que haber sido incluidos por el cliente REACT
+
+NO PODEMOS MEZCLAR:
+- QUIEN GENERA EL JWT
+- QUIEN PROCESA EL JWT
+
+Yo puedo generar el JWT con un cliente (aplicacion)
+Y procesarlo con 50 aplicaciones (SINGLE SIGN ON?)

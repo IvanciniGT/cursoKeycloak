@@ -30,7 +30,7 @@ class KeycloakLogin extends Component {
             headers: {
               "Authorization": "Bearer "+keycloak.token,
             }})
-            .then((response) => response.text())
+            .then(      (response) => response.text()        )
             .then((text) => console.log(text))
             .catch(error => console.log(error));
             
