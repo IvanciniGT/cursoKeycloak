@@ -122,3 +122,11 @@ class Usuario extends React.Component{
 }
 
 <Usuario>
+
+
+docker cp mikeycloak1://opt/keycloak/conf/server.keystore .
+
+keytool -exportcert -rfc -alias server -keystore server.keystore -file selfsigned.crt
+sudo keytool -importcert -file selfsigned.crt -noprompt -alias certificate_alias -storepass changeit -keystore /usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts
+
+mvn spring-boot:run

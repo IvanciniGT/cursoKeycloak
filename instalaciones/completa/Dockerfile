@@ -10,7 +10,7 @@ WORKDIR /opt/keycloak
 # Para el curso está guay.... para un entorno real de producción, 
 # Inyectar aqui dentro un certificado DE VERDAD, de una CA reputada !
 # /opt/keycloak/conf/server.keystore
-ENV KC_HOSTNAME=3.253.29.47 
+ENV KC_HOSTNAME=54.154.167.207
                               # AQUI PONEMOS LA IP QUE SACAMOS DEL "curl ifconfig.me"
                               # En un entorno real, que pondríamos ahí?
                               # El fqdn del servidor => El nombre de red del servidor de keycloak
