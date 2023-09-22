@@ -22,7 +22,9 @@ public class TestController {
         return ResponseEntity.ok("Hello User");
     }
 
-    //@RolesAllowed("admin")
+    //@RolesAllowed("admin")            -> jsr250Enabled
+    //@PreAutorize("hasRole('admin')")  -> securedEnabled
+    //@Secured("admin")                 -> prePostEnabled
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public ResponseEntity<String> getAdmin(@RequestHeader String Authorization) {
         return ResponseEntity.ok("Hello Admin");
